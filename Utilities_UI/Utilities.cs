@@ -45,5 +45,23 @@ namespace Utilities_UI
             IWebElement signIn = WebDriver.FindElement(By.XPath("//h1[@class='a-spacing-small']"));
             return signIn;
         }
+
+        public static void TakeScreenshot()
+        {
+            if (!(Utilities.WebDriver is ITakesScreenshot takesScreenshot))
+            {
+                return;
+            }
+
+            var screenshot = takesScreenshot.GetScreenshot();
+
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
+            string fileName = $"{fileNameWithoutExtension}.png";
+            string tempFileName = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+
+            screenshot.SaveAsFile(tempFileName, ScreenshotImageFormat.Png);
+
+            Console.WriteLine($"SCREENSHOT[ file:///{tempFileName} ]SCREENSHOT");
+        }
     }
 }
