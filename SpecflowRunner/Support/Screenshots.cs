@@ -19,20 +19,7 @@ namespace SpecflowRunner.Hooks
         public void MakeScreenshotAfterStep()
         {
             Utilities.TakeScreenshot();
-           /* if (!(Utilities.WebDriver is ITakesScreenshot takesScreenshot))
-            {
-                return;
-            }
-
-            var screenshot = takesScreenshot.GetScreenshot();
-
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
-            string fileName = $"{fileNameWithoutExtension}.png";
-            string tempFileName = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-
-            screenshot.SaveAsFile(tempFileName, ScreenshotImageFormat.Png);
-
-            Console.WriteLine($"SCREENSHOT[ file:///{tempFileName} ]SCREENSHOT");*/
+         
         }
     }
 }
