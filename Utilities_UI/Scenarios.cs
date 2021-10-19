@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Utilities_UI
     public class Scenarios
     {
         static String SignInText;
+        static String telName;
         public static void Login()
         {
             IWebElement SigninGrid = Utilities.WebDriver.FindElement(By.XPath("//div[@class='nav-signin-tt nav-flyout']"));
@@ -97,7 +99,7 @@ namespace Utilities_UI
                 String windowHandle = Utilities.WebDriver.WindowHandles[1];
                 Utilities.WebDriver.SwitchTo().Window(windowHandle);
 
-                String telName = Utilities.WebDriver.FindElement(By.Id("productTitle")).Text;
+                telName = Utilities.WebDriver.FindElement(By.Id("productTitle")).Text;
                 Utilities.Log("Element to be added in the cart:" + telName);
 
                 Utilities.WebDriver.FindElement(By.XPath("//input[@value='Add to Cart']")).Click();
@@ -109,23 +111,7 @@ namespace Utilities_UI
                     Utilities.WebDriver.FindElement(By.Id("nav-cart-count-container")).Click();
                     Thread.Sleep(3000);
 
-                    IList<IWebElement> list = Utilities.WebDriver.FindElements(By.XPath("//span[@class='a-truncate-cut']"));
-
-                    foreach (IWebElement el in list)
-                    {
-                        //Program.Log("In the cart:" + el.Text);
-
-                        if (el.Text.Contains(telName))
-                        {
-                            //Assert.AreEqual(telName, el.Text);
-                            Utilities.Log("Verified item in the cart is:" + el.Text);
-                            break;
-                        }
-                        else
-                        {
-                            //Assert.AreNotEqual(telName, el.Text);
-                        }
-                    }
+                   
                 }
                 else
                 {
@@ -133,23 +119,6 @@ namespace Utilities_UI
                     Utilities.WebDriver.FindElement(By.Id("nav-cart-count-container")).Click();
                     Thread.Sleep(3000);
 
-                    IList<IWebElement> list = Utilities.WebDriver.FindElements(By.XPath("//span[@class='a-truncate-cut']"));
-
-                    foreach (IWebElement el in list)
-                    {
-                        //Program.Log("In the cart:" + el.Text);
-
-                        if (el.Text.Contains(telName))
-                        {
-                            //Assert.AreEqual(telName, el.Text);
-                            Utilities.Log("Verified item in the cart is:" + el.Text);
-                            break;
-                        }
-                        else
-                        {
-                            //Assert.AreNotEqual(telName, el.Text);
-                        }
-                    }
                 }
 
             }
@@ -159,9 +128,8 @@ namespace Utilities_UI
             }
             finally
             {
+                Utilities.WebDriver.FindElement(By.Id("nav-cart-count-container")).Click();
                 Thread.Sleep(5000);
-
-
             }
         }
 
@@ -191,6 +159,26 @@ namespace Utilities_UI
             {
                 Utilities.Log("User is not logged in");
 
+            }
+        }
+
+        public static void ValidateItemsInCart()
+        {
+            IList<IWebElement> list = Utilities.WebDriver.FindElements(By.XPath("//span[@class='a-truncate-cut']"));
+
+            foreach (IWebElement el in list)
+            {
+
+                if (el.Text.Contains(telName))
+                {
+                    Assert.AreEqual(telName, el.Text);
+                    Utilities.Log("Verified item in the cart is:" + el.Text);
+                    break;
+                }
+                else
+                {
+                    Assert.AreNotEqual(telName, el.Text);
+                }
             }
         }
     }

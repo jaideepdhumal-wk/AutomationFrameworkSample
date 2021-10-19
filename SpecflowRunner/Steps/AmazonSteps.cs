@@ -28,8 +28,8 @@ namespace SpecflowRunner.Steps
         [Then(@"the selected item should be added to cart")]
         public void ThenTheSelectedItemShouldBeAddedToCart()
         {
-            //Scenarios.Logout();
-            //Utilities.WebDriver.Quit();
+            Scenarios.ValidateItemsInCart();
+           
         }
     }
 }
