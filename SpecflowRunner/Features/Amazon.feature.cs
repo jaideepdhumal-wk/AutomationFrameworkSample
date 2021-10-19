@@ -19,7 +19,7 @@ namespace SpecflowRunner.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Amazon", Description="\tSimple calculator for adding two numbers", SourceFile="Features\\Amazon.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Amazon", SourceFile="Features\\Amazon.feature", SourceLine=0)]
     public partial class AmazonFeature
     {
         
@@ -34,7 +34,7 @@ namespace SpecflowRunner.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Amazon", "\tSimple calculator for adding two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Amazon", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

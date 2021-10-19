@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -48,20 +49,15 @@ namespace Utilities_UI
 
         public static void TakeScreenshot()
         {
-            if (!(Utilities.WebDriver is ITakesScreenshot takesScreenshot))
+            var takesScreenshot = Utilities.WebDriver as ITakesScreenshot;
+            if (takesScreenshot != null)
             {
-                return;
+                var screenshot = takesScreenshot.GetScreenshot();
+                var tempFileName = Path.Combine(Directory.GetCurrentDirectory(), Path.GetFileNameWithoutExtension(Path.GetTempFileName())) + ".jpg";
+                screenshot.SaveAsFile(tempFileName, ScreenshotImageFormat.Jpeg);
+
+                Console.WriteLine($"SCREENSHOT[ file:///{tempFileName} ]SCREENSHOT");
             }
-
-            var screenshot = takesScreenshot.GetScreenshot();
-
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
-            string fileName = $"{fileNameWithoutExtension}.png";
-            string tempFileName = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-
-            screenshot.SaveAsFile(tempFileName, ScreenshotImageFormat.Png);
-
-            Console.WriteLine($"SCREENSHOT[ file:///{tempFileName} ]SCREENSHOT");
         }
     }
 }
